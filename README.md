@@ -14,6 +14,21 @@ El proyecto está compuesto de 2 piezas de software.
 
 _Las actrices y las películas no pueden estar repetidas en la BD_
 
+## Para ejecutar el código
+```
+Ejecutar main.py 
+** Asegurarse de que sql.py y scrapping.py estén en la misma carpeta que main.py **
+```
+
+## Librerias utilizadas
+```
+peewee: se utiliza como orm para base de datos
+threading: se utiliza para la implementación de consumidor y productor
+time: para utilización de sleeps
+logging: se utiliza para prints en la terminal 
+scrapping: utiliza beuatiful soup para el scrapping de las páginas
+request: se utiliza para obtener el código fuente de las páginas de wikipedia
+```
 
 ## Web Scrapping
 Se tienen dos funciones:
@@ -32,7 +47,24 @@ Las funciones para rellenar estas tablas son:
 
 ## Productores y Consumidores
 #### Productores
-Al principio, cada productor hace scrapping y obtiene su lista con todas las actrices. 
+Al principio, cada productor hace scrapping y cada uno obtiene su lista con todas las actrices ya que la lista de actrices es un atributo de la clase productor. 
+
+Proceso:
+- Función `run`: Elige el item 0 de la lista de actrices, lo elimina de la lista de actrices, procede a revisar que en la lista list_of_used no se encuentre dicho item.
+- Si el item no se encuentra en la lista list_of_used, lo agrega a dicha lista y lo agrega al queue.
+- De lo contrario, repite el proceso hasta encontrar un item que no este en list_of_usef.
 
 #### Consumidores
+Los consumidores empiezan a consumir si se cumple la condición de si el queue (buffer) no está vacío. Cada consumidor cumple con el proceso completo para empezar con otro item. 
+
+Proceso:
+1. Se llama a la función `insert_actress`
+2. Llama a la función  `get_movies`
+3. llamar la función `insert_movie`, dicha función agrega a la tabla de fact de películas y actrices.
+
+
+
+
+
+
 
