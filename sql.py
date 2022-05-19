@@ -9,7 +9,7 @@ class actrices(Model):
     name = CharField(unique=True)
     url = CharField()
     idconsumidor = CharField()
-    idproductor = CharField()
+    idproductor = CharField() 
     
 
     class Meta:
@@ -74,8 +74,5 @@ def insert_movie(movies,consumidor,nombre):
             
         
         
-
-
-
 
 
